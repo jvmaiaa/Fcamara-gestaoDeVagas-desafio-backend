@@ -1,0 +1,18 @@
+spring:
+  application:
+  name: backend
+
+  jpa:
+    show-sql: true
+    format_sql: true
+#    hibernate:
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#    url: ${DB_URL}
+
+server:
+  servlet:
+    context-path: /api
