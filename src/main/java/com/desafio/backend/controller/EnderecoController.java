@@ -21,7 +21,7 @@ public class EnderecoController {
 
     private final EnderecoService enderecoService;
 
-    @PostMapping
+    @PostMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(CREATED)
     public EnderecoResponseDTO cadastra(@Valid @RequestBody EnderecoRequestDTO requestDTO,
                                         HttpServletResponse response){
@@ -34,27 +34,27 @@ public class EnderecoController {
         return enderecoResponse;
     }
 
-    @GetMapping
+    @GetMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public Page<EnderecoResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
                                                    @RequestParam(defaultValue = "5") int itens){
         return enderecoService.buscaPaginada(pagina, itens);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public EnderecoResponseDTO buscaPorId(@PathVariable Long id){
         return enderecoService.buscaPorId(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public EnderecoResponseDTO atualiza(@PathVariable Long id,
                                         @RequestBody EnderecoRequestDTO enderecoRequestDTO){
         return enderecoService.atualiza(enderecoRequestDTO, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id){
         enderecoService.deleta(id);

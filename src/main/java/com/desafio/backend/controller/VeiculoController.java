@@ -24,7 +24,7 @@ public class VeiculoController {
 
     private final VeiculoService veiculoService;
 
-    @PostMapping
+    @PostMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(CREATED)
     public VeiculoResponseDTO cadastra(@Valid @RequestBody VeiculoRequestDTO veiculoRequestDTO,
                                        HttpServletResponse response) {
@@ -37,27 +37,27 @@ public class VeiculoController {
         return veiculoResponseDTO;
     }
 
-    @GetMapping
+    @GetMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public Page<VeiculoResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
                                                   @RequestParam(defaultValue = "5") int itens) {
         return veiculoService.buscaPaginada(pagina, itens);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public VeiculoResponseDTO buscaPorId(@PathVariable Long id) {
         return veiculoService.buscaPorID(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public VeiculoResponseDTO atualiza(@Valid @RequestBody VeiculoRequestDTO veiculoRequestDTO,
                                        @PathVariable Long id) {
         return veiculoService.atualiza(veiculoRequestDTO, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id) {
         veiculoService.deleta(id);

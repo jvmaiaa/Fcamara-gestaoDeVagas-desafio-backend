@@ -23,7 +23,7 @@ public class RelatorioController {
     private final RelatorioService relatorioService;
 
 
-    @PostMapping
+    @PostMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(CREATED)
     public RelatorioResponseDTO registraEntrada(@Valid @RequestBody RelatorioRequestDTO relatorioRequestDTO,
                                          HttpServletResponse response){
@@ -36,38 +36,36 @@ public class RelatorioController {
         return relatorioResponse;
     }
 
-    @GetMapping("/registro-geral")
+    @GetMapping(value = "/registro-geral", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public Page<RelatorioResponseDTO> registrosPaginados(@RequestParam(defaultValue = "0") int pagina,
                                                    @RequestParam(defaultValue = "5") int itens){
         return relatorioService.buscaPaginada(pagina, itens);
     }
 
-    @GetMapping("/registro-geral/{id}")
+    @GetMapping(value = "/registro-geral/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public RelatorioResponseDTO buscaRegistroPorID(@PathVariable Long id){
         return relatorioService.buscaPorID(id);
     }
 
-    @PutMapping("/registra-saida/{id}")
+    @PutMapping(value = "/registra-saida/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public RelatorioResponseDTO registraSaida(@PathVariable Long id){
         return relatorioService.registraSaida(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id){
         relatorioService.deleta(id);
     }
 
-    @GetMapping("/entrada-saida")
+    @GetMapping(value = "/entrada-saida", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public RegistroEntradaSaida contadorEntradaSaida(){
         return relatorioService.contadorEntradaSaida();
     }
-
-
 
 }
 

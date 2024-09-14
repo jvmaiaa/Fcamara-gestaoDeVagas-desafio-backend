@@ -21,7 +21,7 @@ public class EmpresaController {
 
     private final EmpresaService empresaService;
 
-    @PostMapping
+    @PostMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(CREATED)
     public EmpresaResponseDTO cadastra(@Valid @RequestBody EmpresaRequestDTO requestDTO,
                                        HttpServletResponse response){
@@ -34,27 +34,27 @@ public class EmpresaController {
         return empresaResponse;
     }
 
-    @GetMapping(produces = {"application/json", "application/xml"})
+    @GetMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public Page<EmpresaResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
                                                   @RequestParam(defaultValue = "5") int itens){
         return empresaService.buscaPaginada(pagina, itens);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public EmpresaResponseDTO buscaPorId(@PathVariable Long id){
         return empresaService.buscaPorId(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public EmpresaResponseDTO atualizada(@Valid @RequestBody EmpresaRequestDTO requestDTO,
                                          @PathVariable Long id){
         return empresaService.atualiza(requestDTO, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id){
         empresaService.deleta(id);
