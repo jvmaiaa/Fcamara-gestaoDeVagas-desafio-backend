@@ -1,4 +1,4 @@
-package com.desafio.backend.exception;
+package com.desafio.backend.infra.exceptions;
 
 import org.springframework.dao.DataIntegrityViolationException;
 

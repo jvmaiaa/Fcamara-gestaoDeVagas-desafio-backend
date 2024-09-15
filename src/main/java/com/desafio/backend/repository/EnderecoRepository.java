@@ -1,4 +1,4 @@
-package com.desafio.backend.domain.repository;
+package com.desafio.backend.repository;
 
 import com.desafio.backend.domain.entity.EnderecoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,11 +3,10 @@ package com.desafio.backend.service.impl;
 import com.desafio.backend.domain.dto.request.EnderecoRequestDTO;
 import com.desafio.backend.domain.dto.response.EnderecoResponseDTO;
 import com.desafio.backend.domain.entity.EnderecoEntity;
-import com.desafio.backend.domain.repository.EnderecoRepository;
-import com.desafio.backend.exception.DadoInvalidoException;
-import com.desafio.backend.exception.EntityNotFoundException;
-import com.desafio.backend.exception.ExceptionMessages;
-import com.desafio.backend.mapper.EnderecoMapper;
+import com.desafio.backend.repository.EnderecoRepository;
+import com.desafio.backend.infra.exceptions.DadoInvalidoException;
+import com.desafio.backend.infra.exceptions.EntityNotFoundException;
+import com.desafio.backend.domain.mapper.EnderecoMapper;
 import com.desafio.backend.service.EnderecoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,7 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.desafio.backend.exception.ExceptionMessages.*;
+import static com.desafio.backend.infra.exceptions.ExceptionMessages.*;
 
 @Service
 @RequiredArgsConstructor

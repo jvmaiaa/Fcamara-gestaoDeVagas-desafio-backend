@@ -1,4 +1,4 @@
-package com.desafio.backend.exception;
+package com.desafio.backend.infra.exceptions;
 
 
 public class EntityNotFoundException extends RuntimeException {

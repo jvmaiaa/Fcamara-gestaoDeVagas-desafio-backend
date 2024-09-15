@@ -6,13 +6,13 @@ import com.desafio.backend.domain.dto.response.RelatorioResponseDTO;
 import com.desafio.backend.domain.entity.EmpresaEntity;
 import com.desafio.backend.domain.entity.RelatorioEntity;
 import com.desafio.backend.domain.enums.TipoVeiculo;
-import com.desafio.backend.domain.repository.EmpresaRepository;
-import com.desafio.backend.domain.repository.RelatorioRepository;
-import com.desafio.backend.domain.repository.VeiculoRepository;
-import com.desafio.backend.exception.DadoInvalidoException;
-import com.desafio.backend.exception.EntityNotFoundException;
-import com.desafio.backend.exception.RelatorioCompletoException;
-import com.desafio.backend.mapper.RelatorioMapper;
+import com.desafio.backend.repository.EmpresaRepository;
+import com.desafio.backend.repository.RelatorioRepository;
+import com.desafio.backend.repository.VeiculoRepository;
+import com.desafio.backend.infra.exceptions.DadoInvalidoException;
+import com.desafio.backend.infra.exceptions.EntityNotFoundException;
+import com.desafio.backend.infra.exceptions.RelatorioCompletoException;
+import com.desafio.backend.domain.mapper.RelatorioMapper;
 import com.desafio.backend.service.RelatorioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static com.desafio.backend.exception.ExceptionMessages.*;
+import static com.desafio.backend.infra.exceptions.ExceptionMessages.*;
 
 @Service
 @RequiredArgsConstructor

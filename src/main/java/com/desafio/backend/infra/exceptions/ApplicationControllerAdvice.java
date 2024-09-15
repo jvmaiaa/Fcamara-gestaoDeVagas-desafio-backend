@@ -1,4 +1,4 @@
-package com.desafio.backend.exception;
+package com.desafio.backend.infra.exceptions;
 
 import com.desafio.backend.domain.dto.response.BeanValidationMessage;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
-import static com.desafio.backend.exception.ExceptionMessages.ENTIDADE_NAO_ENCONTRADA;
+import static com.desafio.backend.infra.exceptions.ExceptionMessages.ENTIDADE_NAO_ENCONTRADA;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 

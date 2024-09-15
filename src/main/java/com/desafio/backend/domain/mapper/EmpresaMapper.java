@@ -1,4 +1,4 @@
-package com.desafio.backend.mapper;
+package com.desafio.backend.domain.mapper;
 
 import com.desafio.backend.domain.dto.request.EmpresaRequestDTO;
 import com.desafio.backend.domain.dto.response.EmpresaResponseDTO;

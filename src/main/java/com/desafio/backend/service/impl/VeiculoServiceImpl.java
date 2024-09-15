@@ -3,10 +3,10 @@ package com.desafio.backend.service.impl;
 import com.desafio.backend.domain.dto.request.VeiculoRequestDTO;
 import com.desafio.backend.domain.dto.response.VeiculoResponseDTO;
 import com.desafio.backend.domain.entity.VeiculoEntity;
-import com.desafio.backend.domain.repository.VeiculoRepository;
-import com.desafio.backend.exception.DadoInvalidoException;
-import com.desafio.backend.exception.EntityNotFoundException;
-import com.desafio.backend.mapper.VeiculoMapper;
+import com.desafio.backend.repository.VeiculoRepository;
+import com.desafio.backend.infra.exceptions.DadoInvalidoException;
+import com.desafio.backend.infra.exceptions.EntityNotFoundException;
+import com.desafio.backend.domain.mapper.VeiculoMapper;
 import com.desafio.backend.service.VeiculoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,8 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.desafio.backend.exception.ExceptionMessages.VEICULO_NAO_ENCONTRADO;
-import static com.desafio.backend.exception.ExceptionMessages.VEICULO_VINCULADO_A_RELATORIO;
+import static com.desafio.backend.infra.exceptions.ExceptionMessages.VEICULO_NAO_ENCONTRADO;
+import static com.desafio.backend.infra.exceptions.ExceptionMessages.VEICULO_VINCULADO_A_RELATORIO;
 
 @Service
 @RequiredArgsConstructor
