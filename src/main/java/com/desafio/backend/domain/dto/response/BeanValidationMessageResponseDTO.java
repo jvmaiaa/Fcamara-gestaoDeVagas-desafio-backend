@@ -6,13 +6,13 @@ import org.springframework.validation.FieldError;
 
 @Data
 @AllArgsConstructor
-public class BeanValidationMessage {
+public class BeanValidationMessageResponseDTO {
 
     private String campo;
 
     private String mensagem;
 
-    public BeanValidationMessage(FieldError erro) {
+    public BeanValidationMessageResponseDTO(FieldError erro) {
         this(erro.getField(), erro.getDefaultMessage());
     }
 }

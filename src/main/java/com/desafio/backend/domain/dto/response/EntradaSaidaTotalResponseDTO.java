@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistroEntradaSaida {
+public class EntradaSaidaTotalResponseDTO {
 
     private Integer quantidadeEntrada;
 

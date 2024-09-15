@@ -1,6 +1,6 @@
 package com.desafio.backend.infra.exceptions;
 
-import com.desafio.backend.domain.dto.response.BeanValidationMessage;
+import com.desafio.backend.domain.dto.response.BeanValidationMessageResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,10 +37,10 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(BAD_REQUEST)
-    public ResponseEntity<List<BeanValidationMessage>>
+    public ResponseEntity<List<BeanValidationMessageResponseDTO>>
     handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
         List<FieldError> erros = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(erros.stream().map(BeanValidationMessage::new).toList());
+        return ResponseEntity.badRequest().body(erros.stream().map(BeanValidationMessageResponseDTO::new).toList());
     }
 
     @ExceptionHandler(jakarta.persistence.EntityNotFoundException.class)
