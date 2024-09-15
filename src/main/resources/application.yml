@@ -1,17 +1,22 @@
 spring:
   application:
-  name: backend
+    name: backend
+#  config:
+#    import: optional:file:.env.properties[.properties]
+#  profiles:
+#    active: dev
+
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
 
   jpa:
     show-sql: true
     format_sql: true
-#    hibernate:
-#      ddl-auto: update
-#      dialect: org.hibernate.dialect.PostgreSQLDialect
-#  datasource:
-#    username: ${DB_USERNAME}
-#    password: ${DB_PASSWORD}
-#    url: ${DB_URL}
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   servlet:
