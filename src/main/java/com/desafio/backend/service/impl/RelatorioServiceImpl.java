@@ -1,18 +1,19 @@
 package com.desafio.backend.service.impl;
 
 import com.desafio.backend.domain.dto.request.RelatorioRequestDTO;
-import com.desafio.backend.domain.dto.response.RegistroEntradaSaida;
+import com.desafio.backend.domain.dto.response.EntradaSaidaPorHoraResponseDTO;
+import com.desafio.backend.domain.dto.response.EntradaSaidaTotalResponseDTO;
 import com.desafio.backend.domain.dto.response.RelatorioResponseDTO;
 import com.desafio.backend.domain.entity.EmpresaEntity;
 import com.desafio.backend.domain.entity.RelatorioEntity;
 import com.desafio.backend.domain.enums.TipoVeiculo;
-import com.desafio.backend.repository.EmpresaRepository;
-import com.desafio.backend.repository.RelatorioRepository;
-import com.desafio.backend.repository.VeiculoRepository;
+import com.desafio.backend.domain.mapper.RelatorioMapper;
 import com.desafio.backend.infra.exceptions.DadoInvalidoException;
 import com.desafio.backend.infra.exceptions.EntityNotFoundException;
 import com.desafio.backend.infra.exceptions.RelatorioCompletoException;
-import com.desafio.backend.domain.mapper.RelatorioMapper;
+import com.desafio.backend.repository.EmpresaRepository;
+import com.desafio.backend.repository.RelatorioRepository;
+import com.desafio.backend.repository.VeiculoRepository;
 import com.desafio.backend.service.RelatorioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import static com.desafio.backend.infra.exceptions.ExceptionMessages.*;
@@ -43,7 +45,7 @@ public class RelatorioServiceImpl implements RelatorioService {
             relatorioRepository.save(relatorioEntity);
 
             EmpresaEntity empresaEntity = empresaRepository.findById(relatorioRequestDTO.getIdEmpresa())
-                    .orElseThrow(() -> new EntityNotFoundException(String.format(RELATORIO_NAO_ENCONTRADO, relatorioRequestDTO.getIdEmpresa())));
+                    .orElseThrow(() -> new EntityNotFoundException(String.format(EMPRESA_NAO_ENCONTRADA, relatorioRequestDTO.getIdEmpresa())));
 
             diminuiVagas(empresaEntity, relatorioEntity);
             return RelatorioMapper.entityToResponse(relatorioEntity);
@@ -76,10 +78,11 @@ public class RelatorioServiceImpl implements RelatorioService {
             throw new RelatorioCompletoException(String.format(RELATORIO_COMPLETO, id));
         }
         relatorioEntity.setDataSaida(LocalDateTime.now());
-
+        verificaDataSaida(relatorioEntity);
         EmpresaEntity entity = empresaRepository.findById(relatorioEntity.getEmpresa().getId())
                 .orElseThrow(() -> new EntityNotFoundException(String.format(EMPRESA_NAO_ENCONTRADA, relatorioEntity.getEmpresa().getId())));
         aumentaVagas(entity, relatorioEntity);
+        relatorioRepository.save(relatorioEntity);
         return RelatorioMapper.entityToResponse(relatorioEntity);
     }
 
@@ -90,13 +93,24 @@ public class RelatorioServiceImpl implements RelatorioService {
         relatorioRepository.delete(relatorioEntity);
     }
 
-    public RegistroEntradaSaida contadorEntradaSaida() {
+    public EntradaSaidaTotalResponseDTO contadorEntradaSaida() {
         Optional<Integer> contadorDeEntrada = relatorioRepository.contadorDeEntrada();
         Optional<Integer> contadorDeSaida = relatorioRepository.contadorDeSaida();
-        RegistroEntradaSaida registro = new RegistroEntradaSaida();
+        EntradaSaidaTotalResponseDTO registro = new EntradaSaidaTotalResponseDTO();
         registro.setQuantidadeEntrada(contadorDeEntrada.orElse(0));
         registro.setQuantidadeSaida(contadorDeSaida.orElse(0));
         return registro;
+    }
+
+    public EntradaSaidaPorHoraResponseDTO contarEntradaSaidaPorHora(Long empresaId, LocalDateTime dataInicio, LocalDateTime dataFim) {
+        try {
+            Integer entradas = relatorioRepository.contarEntradasPorHora(empresaId, dataInicio, dataFim);
+            Integer saidas = relatorioRepository.contarSaidasPorHora(empresaId, dataInicio, dataFim);
+
+            return new EntradaSaidaPorHoraResponseDTO(entradas, saidas);
+        } catch (DateTimeParseException e) {
+            throw new DadoInvalidoException(String.format(DATA_INVALIDA));
+        }
     }
 
     public static void diminuiVagas(EmpresaEntity empresa, RelatorioEntity relatorio){
@@ -117,5 +131,11 @@ public class RelatorioServiceImpl implements RelatorioService {
         empresa.setVagasCarro(relatorio.getTipoVeiculo() == TipoVeiculo.CARRO
                 ? empresa.getVagasCarro() + 1
                 : empresa.getVagasCarro());
+    }
+
+    public static void verificaDataSaida(RelatorioEntity relatorioEntity) {
+        if (relatorioEntity.getDataSaida().isBefore(relatorioEntity.getDataEntrada())) {
+            throw new DadoInvalidoException(String.format(RELATORIO_SAIDA_ANTES_ENTRADA));
+        }
     }
 }

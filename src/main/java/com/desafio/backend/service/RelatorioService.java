@@ -1,9 +1,12 @@
 package com.desafio.backend.service;
 
 import com.desafio.backend.domain.dto.request.RelatorioRequestDTO;
-import com.desafio.backend.domain.dto.response.RegistroEntradaSaida;
+import com.desafio.backend.domain.dto.response.EntradaSaidaTotalResponseDTO;
+import com.desafio.backend.domain.dto.response.EntradaSaidaPorHoraResponseDTO;
 import com.desafio.backend.domain.dto.response.RelatorioResponseDTO;
 import org.springframework.data.domain.Page;
+
+import java.time.LocalDateTime;
 
 public interface RelatorioService {
 
@@ -17,5 +20,7 @@ public interface RelatorioService {
 
     void deleta(Long id);
 
-    RegistroEntradaSaida contadorEntradaSaida();
+    EntradaSaidaTotalResponseDTO contadorEntradaSaida();
+
+    EntradaSaidaPorHoraResponseDTO contarEntradaSaidaPorHora(Long empresaId, LocalDateTime parse, LocalDateTime parse1);
 }

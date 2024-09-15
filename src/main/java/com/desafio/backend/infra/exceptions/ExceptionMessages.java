@@ -13,4 +13,6 @@ public class ExceptionMessages {
     public static final String ENTIDADE_NAO_ENCONTRADA = "A entidade não foi encontrada, verifique o Id e tente novamente.";
     public static final String RELATORIO_COMPLETO = "O relatório com id %d já foi finalizado.";
     public static final String RELATORIO_NAO_ENCONTRADO = "O relatório com id %d não foi encontrado.";
+    public static final String RELATORIO_SAIDA_ANTES_ENTRADA = "O relatório deve possui uma saída após uma entrada.";
+    public static final String DATA_INVALIDA = "A data deve possuir um formato válido.";
 }

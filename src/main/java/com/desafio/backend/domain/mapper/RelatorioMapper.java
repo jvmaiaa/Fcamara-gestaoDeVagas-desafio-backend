@@ -20,12 +20,12 @@ public class RelatorioMapper {
             return null;
         }
         RelatorioEntity entity = new RelatorioEntity();
-        VeiculoEntity veiculoEntity = veiculoRepository.findById(request.getIdVeiculo())
-                .orElseThrow(() -> new EntityNotFoundException(String.format(VEICULO_NAO_ENCONTRADO, request.getIdVeiculo())));
-        entity.setVeiculoEntity(veiculoEntity);
         EmpresaEntity empresaEntity = empresaRepository.findById(request.getIdEmpresa())
                         .orElseThrow(() -> new EntityNotFoundException(String.format(VEICULO_NAO_ENCONTRADO, request.getIdEmpresa())));
         entity.setEmpresa(empresaEntity);
+        VeiculoEntity veiculoEntity = veiculoRepository.findById(request.getIdVeiculo())
+                .orElseThrow(() -> new EntityNotFoundException(String.format(VEICULO_NAO_ENCONTRADO, request.getIdVeiculo())));
+        entity.setVeiculoEntity(veiculoEntity);
         entity.setTipoVeiculo(veiculoEntity.getTipoDeVeiculo());
         return entity;
     }

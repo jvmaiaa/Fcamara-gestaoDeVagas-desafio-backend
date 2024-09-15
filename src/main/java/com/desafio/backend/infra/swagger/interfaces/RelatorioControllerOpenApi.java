@@ -1,7 +1,8 @@
 package com.desafio.backend.infra.swagger.interfaces;
 
 import com.desafio.backend.domain.dto.request.RelatorioRequestDTO;
-import com.desafio.backend.domain.dto.response.RegistroEntradaSaida;
+import com.desafio.backend.domain.dto.response.EntradaSaidaPorHoraResponseDTO;
+import com.desafio.backend.domain.dto.response.EntradaSaidaTotalResponseDTO;
 import com.desafio.backend.domain.dto.response.RelatorioResponseDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +20,9 @@ public interface RelatorioControllerOpenApi {
 
     RelatorioResponseDTO registraSaida(Long id);
 
-    RegistroEntradaSaida contadorEntradaSaida();
+    EntradaSaidaTotalResponseDTO contadorEntradaSaida();
+
+    EntradaSaidaPorHoraResponseDTO contadorEntradaSaidaPorHora(Long empresaId, String horaInicio, String horaFim);
 
     void deleta(Long id);
 
