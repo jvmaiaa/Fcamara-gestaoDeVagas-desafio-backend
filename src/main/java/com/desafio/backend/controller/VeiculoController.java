@@ -1,15 +1,13 @@
 package com.desafio.backend.controller;
 
 import com.desafio.backend.domain.dto.request.VeiculoRequestDTO;
-import com.desafio.backend.domain.dto.response.EmpresaResponseDTO;
 import com.desafio.backend.domain.dto.response.VeiculoResponseDTO;
+import com.desafio.backend.infra.swagger.interfaces.VeiculoControllerOpenApi;
 import com.desafio.backend.service.VeiculoService;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.PushBuilder;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.cdi.Eager;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,12 +17,12 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/veiculo")
-public class VeiculoController {
+@RequestMapping(value = "/veiculo", produces = {"application/xml", "application/json"})
+public class VeiculoController implements VeiculoControllerOpenApi {
 
     private final VeiculoService veiculoService;
 
-    @PostMapping(produces = {"application/xml", "application/json"})
+    @PostMapping
     @ResponseStatus(CREATED)
     public VeiculoResponseDTO cadastra(@Valid @RequestBody VeiculoRequestDTO veiculoRequestDTO,
                                        HttpServletResponse response) {

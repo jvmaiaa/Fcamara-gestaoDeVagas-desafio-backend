@@ -2,6 +2,7 @@ package com.desafio.backend.controller;
 
 import com.desafio.backend.domain.dto.request.EnderecoRequestDTO;
 import com.desafio.backend.domain.dto.response.EnderecoResponseDTO;
+import com.desafio.backend.infra.swagger.interfaces.EnderecoControllerOpenApi;
 import com.desafio.backend.service.EnderecoService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -16,12 +17,12 @@ import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/endereco")
-public class EnderecoController {
+@RequestMapping(value = "/endereco", produces = {"application/xml", "application/json"})
+public class EnderecoController implements EnderecoControllerOpenApi {
 
     private final EnderecoService enderecoService;
 
-    @PostMapping(produces = {"application/xml", "application/json"})
+    @PostMapping
     @ResponseStatus(CREATED)
     public EnderecoResponseDTO cadastra(@Valid @RequestBody EnderecoRequestDTO requestDTO,
                                         HttpServletResponse response){
@@ -34,20 +35,20 @@ public class EnderecoController {
         return enderecoResponse;
     }
 
-    @GetMapping(produces = {"application/xml", "application/json"})
+    @GetMapping
     @ResponseStatus(OK)
     public Page<EnderecoResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
                                                    @RequestParam(defaultValue = "5") int itens){
         return enderecoService.buscaPaginada(pagina, itens);
     }
 
-    @GetMapping(value = "/{id}", produces = {"application/xml", "application/json"})
+    @GetMapping(value = "/{id}")
     @ResponseStatus(OK)
     public EnderecoResponseDTO buscaPorId(@PathVariable Long id){
         return enderecoService.buscaPorId(id);
     }
 
-    @PutMapping(value = "/{id}", produces = {"application/xml", "application/json"})
+    @PutMapping(value = "/{id}")
     @ResponseStatus(OK)
     public EnderecoResponseDTO atualiza(@PathVariable Long id,
                                         @RequestBody EnderecoRequestDTO enderecoRequestDTO){
