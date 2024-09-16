@@ -87,15 +87,15 @@ Caso você queira ver todas as rotas (endpoints) disponíveis, inicialize o proj
 
 Dentro do projeto é possível encontrar três níveis de usuários: **GERENTE, FUNCIONÁRIO** e **CLIENTE** cada um com as suas respectivas permissões.
 - **GERENTE**: É a maior permissão e que pode executar qualquer tipo de ação dentro do sistema.
-- **FUNCIONÁRIO**: Possui controle controlado dentro do sistema, mas com algumas ações que podem ser utilizadas para realizar a gestão dos clientes e dos relatórios.
-- **CLIENTE**: É o usuário com ações mais limitas e que quase não possui tantas ações disponíveis.
+- **FUNCIONÁRIO**: Possui controle limitado dentro do sistema, mas com algumas ações que podem ser utilizadas para realizar a gestão dos clientes e dos relatórios.
+- **CLIENTE**: É o usuário com ações e que pode realizar apenas ações que não comprometam o sistema
 
 <details>
 <summary>Como cadastrar-se</summary>
 
-**CLIENTE:** pode acessar a URL `localhost:8080/api/usuario/cliente`
-**FUNCIONÁRIO:** Pode acessar a URL `localhost:8080/api/usuario/funcionario`
-**GERENTE:** Acesse a seguinte URL `localhost:8080/api/usuario/gerente` 
+**CLIENTE:** Deve acessar a URL `localhost:8080/api/usuario/cliente`
+**FUNCIONÁRIO:** Deve acessar a URL `localhost:8080/api/usuario/funcionario`
+**GERENTE:** Deve acessar a URL `localhost:8080/api/usuario/gerente` 
 
 No corpo da requisição passar a seguinte estrutura **JSON**.
 ```
@@ -116,21 +116,21 @@ Deverá acessar o endpoint `localhost:8080/api/auth` passando o seu login e senh
   "senha" : "<seu_senha>"
 }
 ``` 
-Caso suas credenciais estejam corretas, você um Json Web Token (JWT) semelhante ao seguinte: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNsaSIsImV4cCI6MTcyNjQ3NTkxOX0.KFptyIfkI_-Xa1riZwruf7GDImLMQ0ePDD-rY82HdgE`
+Caso suas credenciais estejam corretas, você receberá um Json Web Token (JWT) semelhante ao seguinte: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNsaSIsImV4cCI6MTcyNjQ3NTkxOX0.KFptyIfkI_-Xa1riZwruf7GDImLMQ0ePDD-rY82HdgE`
 </details>
 <details>
 <summary>Como acessar uma rota protegida</summary>
 
-Com o JWT que você obteve no passo anterior em mãos, acesse a uma rota qualquer protegida, passando ele no no campo `Bearer Token` do seu API Client (recomendo o Postman) e execute a requisição. Caso você tenha a permissão desejada, irá ser feito com sucesso.
+Com o JWT em mãos, obtido no passo anterior, acesse a uma rota qualquer protegida, passando ele no no campo `Bearer Token` do seu API Client (recomendo o Postman) e execute a requisição. Caso você tenha a permissão desejada, irá ser feito com sucesso.
 
 </details>
 
 ## Entidades do Projeto
--> OBS: O projeto deve estar em execução antes de executar qualquer ação para a URL de cada entidade ser acessada
+-> OBS: O projeto deve estar em execução antes de realizer qualquer ação para a URL de cada entidade ser acessada
 <details>
 <summary>Endereço</summary>
 
-Você irá realizar um cadastro de um endereço a partir da URL `localhost:8080/api/endereco` para que possa ser cadastrada uma empresa futuramente, pois não é possível cadastrar uma empresa sem endereço. O único usuário que pode manipular a entidade `Endereço` é o usuário com a permissão de `GERENTE`. 
+Você irá realizar o cadastro de um endereço a partir da URL `localhost:8080/api/endereco` para que possa ser cadastrada uma empresa futuramente, pois não é possível cadastrar uma empresa sem endereço. O único usuário que pode manipular a entidade `Endereço` é o usuário com a permissão de `GERENTE`. 
 
 Cadastrar um endereço - **POST** -> `localhost:8080/api/endereco`
 ```
@@ -147,9 +147,9 @@ Buscar endereços **paginados** - **GET** -> `localhost:8080/api/endereco`
 
 Buscar um endereço por id - **GET** -> `localhost:8080/api/endereco/{id}` passando um Id.
 
-Atualizar um endereço - **PUT** -> `localhost:8080/api/endereco/{id}` passando um Id no parametro e um JSON semelhante acima.
+Atualizar um endereço - **PUT** -> `localhost:8080/api/endereco/{id}` passando um Id no parâmetro e um JSON semelhante acima.
 
-Delete um endereço - **DELETE** -> `localhost:8080/api/endereco/{id}` passando um Id no parametro.
+Delete um endereço - **DELETE** -> `localhost:8080/api/endereco/{id}` passando um Id no parâmetro.
 
 </details>
 
@@ -177,9 +177,9 @@ Buscar empresas **paginadas** - **GET** -> `localhost:8080/api/empresa`
 
 Buscar uma empresa por id - **GET** -> `localhost:8080/api/empresa/{id}` passando um Id.
 
-Atualizar uma empresa - **PUT** -> `localhost:8080/api/empresa/{id}` passando um Id no parametro e um JSON semelhante acima.
+Atualizar uma empresa - **PUT** -> `localhost:8080/api/empresa/{id}` passando um Id no parâmetro e um JSON semelhante acima.
 
-Delete uma empresa - **DELETE** -> `localhost:8080/api/empresa/{id}` passando um Id no parametro.
+Delete uma empresa - **DELETE** -> `localhost:8080/api/empresa/{id}` passando um Id no parâmetro.
 
 </details>
 
@@ -202,9 +202,9 @@ Buscar veículos **paginados** - **GET** -> `localhost:8080/api/veiculo`. Pode s
 
 Buscar um veículo por id - **GET** -> `localhost:8080/api/veiculo/{id}` passando um Id. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
 
-Atualizar um veículo - **PUT** -> `localhost:8080/api/veiculo/{id}` passando um Id no parametro e um JSON semelhante acima. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
+Atualizar um veículo - **PUT** -> `localhost:8080/api/veiculo/{id}` passando um Id no parâmetro e um JSON semelhante acima. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
 
-Delete um veículo - **DELETE** -> `localhost:8080/api/veiculo/{id}` passando um Id no parametr. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
+Delete um veículo - **DELETE** -> `localhost:8080/api/veiculo/{id}` passando um Id no parâmetro. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
 
 </details>
 
@@ -219,18 +219,18 @@ Cadastrar um relatório - **POST** -> `localhost:8080/api/relatorio`. A partir d
     "idVeiculo" : 1
 }
 ```
-Buscar relatórios **paginados** - **GET** -> `localhost:8080/api/relatorio/registro-geral`. Traz as informações gerais de um relátorio.
+Buscar relatórios **paginados** - **GET** -> `localhost:8080/api/relatorio/registro-geral`. Traz as informações gerais de um relatório.
 
 Buscar um relatório por id - **GET** -> `localhost:8080/api/relatorio/registro-geral/{id}` passando um Id.
 
-Finalizar um relaório - **PUT** -> `localhost:8080/api/relatorio/registra-saida/{id}` passando um Id no parametro. Após o relatório ser finalizado, a data de finalização será cadastrada naquele momento exato.
+Finalizar um relatório - **PUT** -> `localhost:8080/api/relatorio/registra-saida/{id}` passando um Id no parâmetro. Após o relatório ser finalizado, a data de finalização será cadastrada naquele momento exato e a vaga do veículo que estava no relatório finalizado, será incrementada (somada), mostrando informando que o veículo já saiu do local.
 
 Busca a **quantidade total** de **entradas e saídas** que ocorreram no sistema - **GET** -> `localhost:8080/api/relatorio/contagem-total/{id}` passando um Id como parâmetro.
 
-Busca a **quantidade total** de **entradas e saídas por HORA** que ocorreram no sistema - **GET** -> `localhost:8080/api/relatorio/contagem-por-hora/{id}` passando um Id como parâmetro. Deve-ser passar o **Id da empresa**, **horário de inicio** e **horário de fim** para que seja feita a busca da maneira correta, segue o exemplo:
+Busca a **quantidade total** de **entradas e saídas por HORA** que ocorreram no sistema - **GET** -> `localhost:8080/api/relatorio/contagem-por-hora/{id}` passando um Id como parâmetro. Deve-se passar o **Id da empresa**, **horário de inicio** e **horário de fim** para que seja feita a busca da maneira correta, segue o exemplo:
 
 ![Imagem Exemplo](Requisicao_Por_Hora.png)
 
-Delete um relatorio - **DELETE** -> `localhost:8080/api/relatorio/{id}` passando um Id no parametro.
+Delete um relatório - **DELETE** -> `localhost:8080/api/relatorio/{id}` passando um Id no parametro.
 
 </details>
