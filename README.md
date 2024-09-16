@@ -52,7 +52,7 @@ A partir deste diagrama é possível encontrar toda a modelagem dos dados/entida
 
     R: Gihub Actions, Docker e Kubernets.
 
-## Documentação e endpoints disponíveis
+## Documentação e endpoints disponíveis - Swagger
 Caso você queira ver todas as rotas (endpoints) disponíveis, inicialize o projeto e acesse a seguinte URL pelo seu navegador: `http://localhost:8080/api/swagger-ui/index.html#/authentication-controller`
 
 ## Tecnologias e suas versões
@@ -82,6 +82,17 @@ Caso você queira ver todas as rotas (endpoints) disponíveis, inicialize o proj
     <td>5.2.2</td>
   </tr>
 </table>
+
+## Como Executar o projeto
+Pré requisitos:
+  - Java 17 instalado 
+  - Portgres instalado
+  - Algum Client para testar as rotas (endpoints). Recomendo o `Postman` por ser simples e amigável.
+  - Caso queira executar alguma consulta específica com o banco, tenha um SGBD. Recomendo o `Dbeaver` pela variedade de Bancos Relacionais que ele oferece suporte.
+1. Abra o seu terminal e execute `git clone https://github.com/jvmaiaa/backend-test-java.git` 
+2. Vá até o arquivo `.env.properties.example` e renomeie ele para `.env.properties` e adicione as suas credenciais aos campos, para que o Spring reconheça as variáveis de ambiente.
+3. Caso tenha dificuldade em configurar as variáveis de ambiente, exclua o arquivo `.env.properties` e configure as credenciais em cada campo do arquivo `application.yml`
+
 
 ## Autenticação e Autorização
 
@@ -207,7 +218,7 @@ Atualizar um veículo - **PUT** -> `localhost:8080/api/veiculo/{id}` passando um
 Delete um veículo - **DELETE** -> `localhost:8080/api/veiculo/{id}` passando um Id no parametr. Pode ser feito por **GERENTE** e **FUNCIONÁRIO**.
 
 </details>
-
+<details>
 <summary>Relatório</summary>
 
 Você irá realizar um cadastro de um relatório a partir da URL `localhost:8080/api/relatorio` para que possa ser feita a gestão de vagas e controle de entrada e saída. Apenas os usuários com permissões de **GERENTE** e **FUNCIONÁRIO** podem manipular a entidade `Relatório`.
