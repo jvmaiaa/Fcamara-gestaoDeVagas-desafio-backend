@@ -16,10 +16,10 @@ A partir deste diagrama é possível encontrar toda a modelagem dos dados/entida
       R: É uma linguagem de consulta para APIs, ele utiliza apenas um endpoint para todas as consultas e a retorna apenas os dados que são desejados.
 - **Pergunta 2**: Descreva como você implementaria o uso do GraphQL como BFF (Backend for Frontend) neste projeto de gerenciamento de estacionamento. Forneça exemplos práticos.
 
-      R: Eu adionaria a dependência, criaria o schema coma as querys e mutations, implementando a lógica com todas as querys necessárias. Infelizmente não deu tempo de realizar a implementação com GraphQL.
+      R: Eu adionaria a dependência do GraphQL no projeto para permitir trabalhar com ele, criaria o schema que representaria as entidades e seus relacionamentos, com as querys então, criaria os resolvers para as querys serem mapeadas no back ou diretamente no DB. Além das queries adicionaria também mutations para permitir modificação dos dados.Infelizmente não deu tempo de realizar a implementação com GraphQL.
 - **Pergunta 3**: Quais são os benefícios de utilizar GraphQL em relação à flexibilidade das consultas? Cite possíveis desafios ao utilizá-lo.
 
-      R: É possível realizar uma busca mais flexíveis e customizada a cada consulta que é realizada ao banco, além que é possível evitar envio várias consultas, como ocorre com REST, tendo assim um maior controle dos erros e eficiência em grandes aplicações. Entre os desafios, se não for feito da maneira correta, pode causar um grande problema, devida as consultas pesadas que são feitas ao banco, dificuldade de manutenabilidade dos schemas.
+      R: É possível realizar uma busca mais flexíveis e customizada a cada consulta que é realizada ao banco, cria um BFF centralizada (uma interface que irá interpretar todos dispositivos) além que é possível evitar envio várias consultas, como ocorre com REST, tendo assim um maior controle dos erros e eficiência em grandes aplicações. Entre os desafios, se não for feito da maneira correta, pode causar um grande problema, devida as consultas pesadas que são feitas ao banco, dificuldade de manutenabilidade dos schemas.
 
 ### 2. Banco de Dados (Nível Básico)
    - **Pergunta 1**: Explique os principais conceitos de um banco de dados relacional, como tabelas, chaves primárias e estrangeiras.
@@ -66,6 +66,7 @@ Caso você queira ver todas as rotas (endpoints) disponíveis, inicialize o proj
     <td>Jackson Dataformat Xml</td>
     <td>Spring Security</td>
     <td>SpringDoc OpenApi</td>
+    <td>Flyway</td>
     <td>Java-jwt</td>
     <td>Java-dotenv</td>
   </tr>
@@ -78,6 +79,7 @@ Caso você queira ver todas as rotas (endpoints) disponíveis, inicialize o proj
     <td>2.17.2</td>
     <td>3.2.3</td>
     <td>2.6.0</td>
+    <td>10.10.0</td>
     <td>4.4.0</td>
     <td>5.2.2</td>
   </tr>
@@ -100,6 +102,8 @@ Dentro do projeto é possível encontrar três níveis de usuários: **GERENTE, 
 - **GERENTE**: É a maior permissão e que pode executar qualquer tipo de ação dentro do sistema.
 - **FUNCIONÁRIO**: Possui controle limitado dentro do sistema, mas com algumas ações que podem ser utilizadas para realizar a gestão dos clientes e dos relatórios.
 - **CLIENTE**: É o usuário com ações e que pode realizar apenas ações que não comprometam o sistema
+
+OBS: Existe alguns usuários que estão sendo pré-cadastrados no arquivo `data.sql` que está presente no projeto, para que possa ser feito a autenticação e autorização. A senda de todos eles é 123.
 
 <details>
 <summary>Como cadastrar-se</summary>

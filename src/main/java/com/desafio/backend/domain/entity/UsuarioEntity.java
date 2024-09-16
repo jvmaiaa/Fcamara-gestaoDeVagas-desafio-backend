@@ -27,24 +27,26 @@ public class UsuarioEntity implements UserDetails {
 
     private String senha;
 
-    private RoleEnum role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "papel")
+    private RoleEnum papel;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == RoleEnum.GERENTE) {
+        if (this.papel == RoleEnum.GERENTE) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_GERENTE"),
                     new SimpleGrantedAuthority("ROLE_FUNCIONARIO"),
                     new SimpleGrantedAuthority("ROLE_CLIENTE")
             );
         }
-        if (this.role == RoleEnum.FUNCIONARIO) {
+        if (this.papel == RoleEnum.FUNCIONARIO) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_FUNCIONARIO"),
                     new SimpleGrantedAuthority("ROLE_CLIENTE")
             );
         }
-        if (this.role == RoleEnum.CLIENTE) {
+        if (this.papel == RoleEnum.CLIENTE) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_CLIENTE")
             );
