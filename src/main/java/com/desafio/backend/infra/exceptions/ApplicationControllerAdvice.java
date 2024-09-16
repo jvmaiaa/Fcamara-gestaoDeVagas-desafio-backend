@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.List;
 
 import static com.desafio.backend.infra.exceptions.ExceptionMessages.ENTIDADE_NAO_ENCONTRADA;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
@@ -32,6 +31,18 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(RelatorioCompletoException.class)
     @ResponseStatus(BAD_REQUEST)
     public String handleRelatorioCompletoException(RelatorioCompletoException ex){
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(UsuarioExisteException.class)
+    @ResponseStatus(CONFLICT)
+    public String handleUsuarioExisteException(UsuarioExisteException ex){
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(TokenGeneratioException.class)
+    @ResponseStatus(BAD_REQUEST)
+    public String handleTokenGeneratioException(TokenGeneratioException ex){
         return ex.getMessage();
     }
 

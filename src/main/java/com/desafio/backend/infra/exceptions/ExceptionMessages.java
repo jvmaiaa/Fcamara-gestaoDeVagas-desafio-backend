@@ -15,4 +15,7 @@ public class ExceptionMessages {
     public static final String RELATORIO_NAO_ENCONTRADO = "O relatório com id %d não foi encontrado.";
     public static final String RELATORIO_SAIDA_ANTES_ENTRADA = "O relatório deve possui uma saída após uma entrada.";
     public static final String DATA_INVALIDA = "A data deve possuir um formato válido.";
+    public static final String USUARIO_JA_EXISTE = "O login que você informou já existe.";
+    public static final String ERRO_GERACAO_TOKEN = "O token JWT não pode ser gerado.";
+    public static final String SEM_AUTORIZACAO = "Usuário sem autorização para executar essa ação.";
 }

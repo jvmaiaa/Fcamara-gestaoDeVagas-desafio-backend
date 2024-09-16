@@ -112,6 +112,51 @@
 			<version>5.2.2</version>
 		</dependency>
 
+		<!-- permite rodar múltipos containers -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-docker-compose</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
+
+		<!-- para gerar o token e pegar seu conteúdo -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
+<!--		&lt;!&ndash; para gerar o token e pegar seu conteúdo - API &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-api</artifactId>-->
+<!--			<version>0.12.5</version>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; para gerar o token e pegar seu conteúdo - Implementação da API acima &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-impl</artifactId>-->
+<!--			<version>0.12.5</version>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Usado para conversão das dependências JJWT &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jsonwebtoken</groupId>-->
+<!--			<artifactId>jjwt-jackson</artifactId>-->
+<!--			<version>0.12.5</version>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
+
+
+		<!-- para implementar autenticação e autorização  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

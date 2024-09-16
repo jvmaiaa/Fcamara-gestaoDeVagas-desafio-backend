@@ -15,8 +15,13 @@ spring:
     show-sql: true
     format_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       dialect: org.hibernate.dialect.PostgreSQLDialect
+
+## Caso eu queira implementar script de inicialização de dados
+#  sql:
+#    init:
+#      data-locations: classpath:/data.sql
 
 server:
   servlet:
