@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,6 +23,7 @@ public class VeiculoController implements VeiculoControllerOpenApi {
 
     private final VeiculoService veiculoService;
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO', 'CLIENTE')")
     @PostMapping
     @ResponseStatus(CREATED)
     public VeiculoResponseDTO cadastra(@Valid @RequestBody VeiculoRequestDTO veiculoRequestDTO,
@@ -35,6 +37,7 @@ public class VeiculoController implements VeiculoControllerOpenApi {
         return veiculoResponseDTO;
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping(produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public Page<VeiculoResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
@@ -42,12 +45,14 @@ public class VeiculoController implements VeiculoControllerOpenApi {
         return veiculoService.buscaPaginada(pagina, itens);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public VeiculoResponseDTO buscaPorId(@PathVariable Long id) {
         return veiculoService.buscaPorID(id);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @PutMapping(value = "/{id}", produces = {"application/xml", "application/json"})
     @ResponseStatus(OK)
     public VeiculoResponseDTO atualiza(@Valid @RequestBody VeiculoRequestDTO veiculoRequestDTO,
@@ -55,6 +60,7 @@ public class VeiculoController implements VeiculoControllerOpenApi {
         return veiculoService.atualiza(veiculoRequestDTO, id);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id) {

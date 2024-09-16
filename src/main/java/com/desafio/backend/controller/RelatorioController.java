@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,6 +26,7 @@ public class RelatorioController implements RelatorioControllerOpenApi {
 
     private final RelatorioService relatorioService;
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @PostMapping
     @ResponseStatus(CREATED)
     public RelatorioResponseDTO registraEntrada(@Valid @RequestBody RelatorioRequestDTO relatorioRequestDTO,
@@ -38,6 +40,7 @@ public class RelatorioController implements RelatorioControllerOpenApi {
         return relatorioResponse;
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping(value = "/registro-geral")
     @ResponseStatus(OK)
     public Page<RelatorioResponseDTO> registrosPaginados(@RequestParam(defaultValue = "0") int pagina,
@@ -45,24 +48,28 @@ public class RelatorioController implements RelatorioControllerOpenApi {
         return relatorioService.buscaPaginada(pagina, itens);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping(value = "/registro-geral/{id}")
     @ResponseStatus(OK)
     public RelatorioResponseDTO buscaRegistroPorID(@PathVariable Long id){
         return relatorioService.buscaPorID(id);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @PutMapping(value = "/registra-saida/{id}")
     @ResponseStatus(OK)
     public RelatorioResponseDTO registraSaida(@PathVariable Long id){
         return relatorioService.registraSaida(id);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping(value = "/contagem-total")
     @ResponseStatus(OK)
     public EntradaSaidaTotalResponseDTO contadorEntradaSaida(){
         return relatorioService.contadorEntradaSaida();
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @GetMapping("/contagem-por-hora")
     @ResponseStatus(OK)
     public EntradaSaidaPorHoraResponseDTO contadorEntradaSaidaPorHora(
@@ -76,6 +83,7 @@ public class RelatorioController implements RelatorioControllerOpenApi {
                 LocalDateTime.parse(horaFim));
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id){

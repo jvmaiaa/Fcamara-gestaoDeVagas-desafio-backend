@@ -7,6 +7,7 @@ import com.desafio.backend.infra.swagger.interfaces.UsuarioControllerOpenApi;
 import com.desafio.backend.service.impl.UsuarioServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,6 +22,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
 
     private final UsuarioServiceImpl authenticationService;
 
+    @PreAuthorize("hasRole('GERENTE')")
     @PostMapping("/gerente")
     @ResponseStatus(CREATED)
     public CadastraResponseDTO cadastraGerente(@RequestBody CadastraRequestDTO cadastraRequestDTO,
@@ -28,12 +30,14 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return cadastraUsuario(cadastraRequestDTO, RoleEnum.GERENTE, response);
     }
 
+    @PreAuthorize("hasAnyRole('GERENTE', 'FUNCIONARIO')")
     @PostMapping("/funcionario")
     @ResponseStatus(CREATED)
     public CadastraResponseDTO cadastraFuncionario(@RequestBody CadastraRequestDTO cadastraRequestDTO,
                                                    HttpServletResponse response) {
         return cadastraUsuario(cadastraRequestDTO, RoleEnum.FUNCIONARIO, response);
     }
+
 
     @PostMapping("/cliente")
     @ResponseStatus(CREATED)

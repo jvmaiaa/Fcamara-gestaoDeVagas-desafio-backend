@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,6 +23,7 @@ public class EmpresaController implements EmpresaControllerOpenApi {
 
     private final EmpresaService empresaService;
 
+    @PreAuthorize("hasRole('GERENTE')")
     @PostMapping
     @ResponseStatus(CREATED)
     public EmpresaResponseDTO cadastra(@Valid @RequestBody EmpresaRequestDTO requestDTO,
@@ -35,6 +37,7 @@ public class EmpresaController implements EmpresaControllerOpenApi {
         return empresaResponse;
     }
 
+    @PreAuthorize("hasRole('GERENTE')")
     @GetMapping
     @ResponseStatus(OK)
     public Page<EmpresaResponseDTO> listaPaginada(@RequestParam(defaultValue = "0") int pagina,
@@ -42,15 +45,17 @@ public class EmpresaController implements EmpresaControllerOpenApi {
         return empresaService.buscaPaginada(pagina, itens);
     }
 
+    @PreAuthorize("hasRole('GERENTE')")
     @GetMapping(value = "/{id}")
     @ResponseStatus(OK)
     public EmpresaResponseDTO buscaPorId(@PathVariable Long id){
         return empresaService.buscaPorId(id);
     }
 
+    @PreAuthorize("hasRole('GERENTE')")
     @PutMapping(value = "/{id}")
     @ResponseStatus(OK)
-    public EmpresaResponseDTO atualizada(@Valid @RequestBody EmpresaRequestDTO requestDTO,
+    public EmpresaResponseDTO atualiza(@Valid @RequestBody EmpresaRequestDTO requestDTO,
                                          @PathVariable Long id){
         return empresaService.atualiza(requestDTO, id);
     }

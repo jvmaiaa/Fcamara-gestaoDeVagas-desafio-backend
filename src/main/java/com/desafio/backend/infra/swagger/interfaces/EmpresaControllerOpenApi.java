@@ -16,7 +16,7 @@ public interface EmpresaControllerOpenApi {
 
     EmpresaResponseDTO buscaPorId(Long id);
 
-    EmpresaResponseDTO atualizada(EmpresaRequestDTO requestDTO, Long id);
+    EmpresaResponseDTO atualiza(EmpresaRequestDTO requestDTO, Long id);
 
     void deleta(Long id);
 }
