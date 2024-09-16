@@ -1,5 +1,6 @@
 package com.desafio.backend.domain.entity;
 
+import com.desafio.backend.domain.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

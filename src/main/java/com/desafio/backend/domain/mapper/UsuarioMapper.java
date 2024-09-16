@@ -10,6 +10,7 @@ public class UsuarioMapper {
         UsuarioEntity entity = new UsuarioEntity();
         entity.setLogin(dto.getLogin());
         entity.setSenha(dto.getSenha());
+        entity.setRole(dto.getRole());
         return entity;
     }
 
@@ -17,6 +18,7 @@ public class UsuarioMapper {
         CadastraResponseDTO dto = new CadastraResponseDTO();
         dto.setId(entity.getId());
         dto.setLogin(entity.getLogin());
+        dto.setRole(entity.getRole());
         return dto;
     }
 }

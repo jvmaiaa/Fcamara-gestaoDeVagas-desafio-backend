@@ -1,4 +1,4 @@
-package com.desafio.backend.domain.entity;
+package com.desafio.backend.domain.enums;
 
 import lombok.Getter;
 

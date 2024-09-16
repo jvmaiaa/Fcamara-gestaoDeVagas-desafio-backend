@@ -12,7 +12,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(value = "/auth", produces = {"application/xml", "application/json"})
 public class AuthenticationController implements AuthenticationControllerOpenApi {
 
     private final AuthenticationService authenticationService;

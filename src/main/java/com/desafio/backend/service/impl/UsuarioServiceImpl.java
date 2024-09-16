@@ -3,6 +3,7 @@ package com.desafio.backend.service.impl;
 import com.desafio.backend.domain.dto.request.CadastraRequestDTO;
 import com.desafio.backend.domain.dto.response.CadastraResponseDTO;
 import com.desafio.backend.domain.entity.UsuarioEntity;
+import com.desafio.backend.domain.enums.RoleEnum;
 import com.desafio.backend.domain.mapper.UsuarioMapper;
 import com.desafio.backend.infra.exceptions.UsuarioExisteException;
 import com.desafio.backend.repository.UsuarioRepository;
@@ -19,7 +20,7 @@ public class UsuarioServiceImpl {
     private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository usuarioRepository;
 
-    public CadastraResponseDTO cadastra(CadastraRequestDTO usuario) {
+    public CadastraResponseDTO cadastra(CadastraRequestDTO usuario, RoleEnum role) {
         UsuarioEntity usuarioExistente = usuarioRepository.findByLogin(usuario.getLogin());
         if (usuarioExistente != null) {
             throw new UsuarioExisteException(USUARIO_JA_EXISTE);
@@ -27,6 +28,7 @@ public class UsuarioServiceImpl {
         }
         var senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
+        usuario.setRole(role);
         UsuarioEntity usuarioEntity = UsuarioMapper.requestToEntity(usuario);
         usuarioRepository.save(usuarioEntity);
         return UsuarioMapper.entityToResponse(usuarioEntity);
