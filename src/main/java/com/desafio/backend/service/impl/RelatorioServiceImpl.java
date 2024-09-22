@@ -104,6 +104,9 @@ public class RelatorioServiceImpl implements RelatorioService {
 
     public EntradaSaidaPorHoraResponseDTO contarEntradaSaidaPorHora(Long empresaId, LocalDateTime dataInicio, LocalDateTime dataFim) {
         try {
+            if (dataFim.isBefore(dataInicio)) {
+                throw new DadoInvalidoException(String.format(DATA_COM_ORDEM_INVALIDA));
+            }
             Integer entradas = relatorioRepository.contarEntradasPorHora(empresaId, dataInicio, dataFim);
             Integer saidas = relatorioRepository.contarSaidasPorHora(empresaId, dataInicio, dataFim);
 

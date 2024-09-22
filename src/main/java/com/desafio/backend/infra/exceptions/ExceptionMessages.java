@@ -18,4 +18,5 @@ public class ExceptionMessages {
     public static final String USUARIO_JA_EXISTE = "O login que você informou já existe.";
     public static final String ERRO_GERACAO_TOKEN = "O token JWT não pode ser gerado.";
     public static final String SEM_AUTORIZACAO = "Usuário sem autorização para executar essa ação.";
+    public static final String DATA_COM_ORDEM_INVALIDA = "A data final deve ser após a data inicial.";
 }
