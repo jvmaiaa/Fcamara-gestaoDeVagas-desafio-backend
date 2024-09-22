@@ -72,6 +72,6 @@ public class VeiculoServiceImpl implements VeiculoService {
         entity.setModelo(request.getModelo() != null ? request.getModelo() : entity.getModelo());
         entity.setCor(request.getCor() != null ? request.getCor() : entity.getCor());
         entity.setPlaca(request.getPlaca() != null ? request.getPlaca() : entity.getPlaca());
-        entity.setTipoDeVeiculo(request.getTipoDeVeiculo() != null ? request.getTipoDeVeiculo() : entity.getTipoDeVeiculo());
+        entity.setTipoVeiculo(request.getTipoVeiculo() != null ? request.getTipoVeiculo() : entity.getTipoVeiculo());
     }
 }

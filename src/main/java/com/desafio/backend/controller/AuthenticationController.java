@@ -3,6 +3,7 @@ package com.desafio.backend.controller;
 import com.desafio.backend.domain.dto.request.AuthRequestDTO;
 import com.desafio.backend.infra.swagger.interfaces.AuthenticationControllerOpenApi;
 import com.desafio.backend.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +21,7 @@ public class AuthenticationController implements AuthenticationControllerOpenApi
 
     @PostMapping
     @ResponseStatus(OK)
-    public String pegaToken(@RequestBody AuthRequestDTO authDto) {
+    public String pegaToken(@Valid @RequestBody AuthRequestDTO authDto) {
         var usuarioAutenticationToken =
                 new UsernamePasswordAuthenticationToken(authDto.getLogin(), authDto.getSenha());
         authenticationManager.authenticate(usuarioAutenticationToken);

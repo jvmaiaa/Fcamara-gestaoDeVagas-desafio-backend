@@ -60,6 +60,8 @@ public class EmpresaController implements EmpresaControllerOpenApi {
         return empresaService.atualiza(requestDTO, id);
     }
 
+    // Esse metodo deveria existir ?
+    @PreAuthorize("hasRole('GERENTE')")
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleta(@PathVariable Long id){

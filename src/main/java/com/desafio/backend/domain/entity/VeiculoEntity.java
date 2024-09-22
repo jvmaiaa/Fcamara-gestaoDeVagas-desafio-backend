@@ -25,7 +25,9 @@ public class VeiculoEntity {
 
     private String placa;
 
-    private TipoVeiculo tipoDeVeiculo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_veiculo")
+    private TipoVeiculo tipoVeiculo;
 
     @OneToOne(mappedBy = "veiculoEntity")
     private RelatorioEntity relatorioEntity;

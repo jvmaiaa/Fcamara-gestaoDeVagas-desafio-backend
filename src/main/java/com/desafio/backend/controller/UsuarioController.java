@@ -46,7 +46,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return cadastraUsuario(cadastraRequestDTO, RoleEnum.CLIENTE, response);
     }
 
-    private CadastraResponseDTO cadastraUsuario(CadastraRequestDTO cadastraRequestDTO, RoleEnum role,
+    private CadastraResponseDTO cadastraUsuario(@RequestBody CadastraRequestDTO cadastraRequestDTO, RoleEnum role,
                                                 HttpServletResponse response) {
         CadastraResponseDTO usuarioResponseDTO = authenticationService.cadastra(cadastraRequestDTO, role);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()

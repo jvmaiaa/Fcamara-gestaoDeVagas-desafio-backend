@@ -18,5 +18,5 @@ public class VeiculoResponseDTO {
 
     private String placa;
 
-    private TipoVeiculo tipoDeVeiculo;
+    private TipoVeiculo tipoVeiculo;
 }

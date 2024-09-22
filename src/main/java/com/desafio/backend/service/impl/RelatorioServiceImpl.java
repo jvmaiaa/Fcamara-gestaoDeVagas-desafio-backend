@@ -114,21 +114,21 @@ public class RelatorioServiceImpl implements RelatorioService {
     }
 
     public static void diminuiVagas(EmpresaEntity empresa, RelatorioEntity relatorio){
-        empresa.setVagasMoto(relatorio.getTipoVeiculo() == TipoVeiculo.MOTO
+        empresa.setVagasMoto(relatorio.getVeiculoEntity().getTipoVeiculo() == TipoVeiculo.MOTO
                 ? empresa.getVagasMoto() - 1
                 : empresa.getVagasMoto());
 
-        empresa.setVagasCarro(relatorio.getTipoVeiculo() == TipoVeiculo.CARRO
+        empresa.setVagasCarro(relatorio.getVeiculoEntity().getTipoVeiculo() == TipoVeiculo.CARRO
                 ? empresa.getVagasCarro() - 1
                 : empresa.getVagasCarro());
     }
 
     public static void aumentaVagas(EmpresaEntity empresa, RelatorioEntity relatorio){
-        empresa.setVagasMoto(relatorio.getTipoVeiculo() == TipoVeiculo.MOTO
+        empresa.setVagasMoto(relatorio.getVeiculoEntity().getTipoVeiculo() == TipoVeiculo.MOTO
                 ? empresa.getVagasMoto() + 1
                 : empresa.getVagasMoto());
 
-        empresa.setVagasCarro(relatorio.getTipoVeiculo() == TipoVeiculo.CARRO
+        empresa.setVagasCarro(relatorio.getVeiculoEntity().getTipoVeiculo() == TipoVeiculo.CARRO
                 ? empresa.getVagasCarro() + 1
                 : empresa.getVagasCarro());
     }

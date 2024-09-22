@@ -30,6 +30,4 @@ public class RelatorioEntity {
     @OneToOne
     @JoinColumn(name = "veiculo_id")
     private VeiculoEntity veiculoEntity;
-
-    private TipoVeiculo tipoVeiculo;
 }

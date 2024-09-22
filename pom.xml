@@ -157,6 +157,21 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!-- Adiciona suporte específico para PostgreSQL -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
+			<version>10.18.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Dependência principal para lógica de migração -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

@@ -15,7 +15,7 @@ public class VeiculoMapper {
         entity.setModelo(request.getModelo());
         entity.setCor(request.getCor());
         entity.setPlaca(request.getPlaca());
-        entity.setTipoDeVeiculo(request.getTipoDeVeiculo());
+        entity.setTipoVeiculo(request.getTipoVeiculo());
         return entity;
     }
 
@@ -29,7 +29,7 @@ public class VeiculoMapper {
         response.setModelo(entity.getModelo());
         response.setCor(entity.getCor());
         response.setPlaca(entity.getPlaca());
-        response.setTipoDeVeiculo(entity.getTipoDeVeiculo());
+        response.setTipoVeiculo(entity.getTipoVeiculo());
         return response;
     }
 }

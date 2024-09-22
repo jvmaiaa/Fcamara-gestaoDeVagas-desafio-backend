@@ -23,5 +23,5 @@ public class VeiculoRequestDTO {
     private String placa;
 
     @NotNull(message = "Campo 'tipoDeVeiculo' não pode ficar em branco.")
-    private TipoVeiculo tipoDeVeiculo;
+    private TipoVeiculo tipoVeiculo;
 }

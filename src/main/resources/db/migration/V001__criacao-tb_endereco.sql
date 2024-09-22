@@ -1,0 +1,9 @@
+CREATE TABLE tb_endereco (
+    id SERIAL NOT NULL PRIMARY KEY,
+    rua VARCHAR(255) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    cep VARCHAR(20) NOT NULL
+);

@@ -4,25 +4,34 @@ spring:
 #  profiles:
 #    active: dev
 
+
+# Configuração do banco de dados
   datasource:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     url: ${DB_URL}
 
-  jpa:
-    show-sql: true
-    format_sql: true
-    hibernate:
-      defer-datasource-initialization: true
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      ddl-auto: create-drop
+#  # Configurações do JPA
+#  jpa:
+#    show-sql: true
+#    format_sql: true
+#    hibernate:
+#      defer-datasource-initialization: true
+#      dialect: org.hibernate.dialect.PostgreSQLDialect
+#      ddl-auto: create-drop
+
+  # Configuração do Flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
 # Caso eu queira implementar script de inicialização de dados
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data.sql
+#  sql:
+#    init:
+#      mode: always
+#      data-locations: classpath:data.sql
 
+# Configuração de prefixo de endpoints
 server:
   servlet:
     context-path: /api
