@@ -11,14 +11,23 @@ spring:
     password: ${DB_PASSWORD}
     url: ${DB_URL}
 
-#  # Configurações do JPA
-#  jpa:
+#  # Configurações do JPA básicas
+  jpa:
 #    show-sql: true
 #    format_sql: true
 #    hibernate:
 #      defer-datasource-initialization: true
 #      dialect: org.hibernate.dialect.PostgreSQLDialect
 #      ddl-auto: create-drop
+
+#  # Automatiza criação de script sql para backup e migrações
+#  properties:
+#    javax:
+#      persistence:
+#        schema-generation:
+#          scripts:
+#            action: create
+#            create-target: src/main/resources/ddl.sql
 
   # Configuração do Flyway
   flyway:
