@@ -4,21 +4,25 @@ spring:
 #  profiles:
 #    active: dev
 
-
 # Configuração do banco de dados
   datasource:
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    url: ${DB_URL}
+    url: jdbc:postgresql://db:5432/estacionamento # ${DB_URL}
+    username: postgres # ${DB_USERNAME}
+    password: root # ${DB_PASSWORD}
+  # Configuração do Flyway
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
 #  # Configurações do JPA básicas
-  jpa:
+#  jpa:
 #    show-sql: true
 #    format_sql: true
 #    hibernate:
 #      defer-datasource-initialization: true
 #      dialect: org.hibernate.dialect.PostgreSQLDialect
 #      ddl-auto: create-drop
+
 
 #  # Automatiza criação de script sql para backup e migrações
 #  properties:
@@ -29,10 +33,6 @@ spring:
 #            action: create
 #            create-target: src/main/resources/ddl.sql
 
-  # Configuração do Flyway
-  flyway:
-    enabled: true
-    baseline-on-migrate: true
 
 # Caso eu queira implementar script de inicialização de dados
 #  sql:

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: . # referencia onde está o Dockerfile
+      dockerfile: Dockerfile
+    image: aula
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      flyway:
+        condition: service_started
+    networks:
+      - app-network
+
+  db:
+    image: postgres:16.1-alpine  # Versão do PostgreSQL 16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres # ${DB_USERNAME}  Substitua pelo seu usuário
+      POSTGRES_PASSWORD: root #${DB_PASSWORD} Substitua pela sua senha
+      POSTGRES_DB: estacionamento #${DB_URL}  Substitua pelo nome do banco
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  flyway:
+    image: flyway/flyway:10.20.0  # Versão do Flyway que você está usando
+    container_name: flyway_migrations
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["-url=jdbc:postgresql://db:5432/estacionamento", "-user=postgres", "-password=root", "migrate"]
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+    networks:
+      - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
