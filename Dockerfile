@@ -1,5 +1,21 @@
-FROM openjdk:17-jdk
+# Etapa 1: Build
+FROM maven:3.9.4-eclipse-temurin-17 AS builder
 
-COPY target/backend-0.0.1-SNAPSHOT.jar /app/app.jar
+WORKDIR /app
 
-CMD ["java", "-jar", "/app/app.jar"]
+COPY pom.xml .
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Execução com Distroless
+FROM gcr.io/distroless/java17-debian11
+
+WORKDIR /app
+
+COPY --from=builder /app/target/backend-0.0.1-SNAPSHOT.jar app.jar
+
+# Segurança: executa como usuário não root
+USER nonroot
+
+CMD ["app.jar"]
